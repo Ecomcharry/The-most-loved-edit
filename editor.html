@@ -58,7 +58,7 @@ h1{
   position:relative;
 }
 
-/* 🔥 IMAGEM AJUSTADA (SEM ZOOM INICIAL) */
+/* 🔥 IMAGEM AJUSTADA (equilíbrio perfeito) */
 .preview img{
   position:absolute;
   top:50%;
@@ -67,8 +67,8 @@ h1{
   width:auto;
   height:auto;
 
-  max-width:90%;
-  max-height:90%;
+  max-width:98%;
+  max-height:98%;
 
   transform:translate(-50%,-50%) scale(1);
 
@@ -212,7 +212,7 @@ input[type=file]{
 
 <script>
 
-/* tipo de polaroid */
+/* tipo polaroid */
 const selected = localStorage.getItem('polaroid');
 
 if(selected === 'Polaroid 2'){
@@ -233,7 +233,7 @@ function loadImage(event,id){
     const img = document.getElementById(id);
     img.src = URL.createObjectURL(file);
 
-    // 🔥 reset correto
+    // reset inicial
     img.dataset.scale = 1;
     img.dataset.x = 0;
     img.dataset.y = 0;
