@@ -75,19 +75,17 @@
 
       width:220px;
 
-      background:white;
-
-      padding:12px 12px 24px 12px;
-
-      border-radius:6px;
-
-      box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
       cursor:pointer;
 
       transition:0.3s;
 
       border:3px solid transparent;
+
+      background:none;
+
+      padding:0;
+
+      box-shadow:none;
 
     }
 
@@ -123,8 +121,6 @@
 
       display:block;
 
-      border-radius:2px;
-
     }
 
     .polaroid:hover{
@@ -137,9 +133,7 @@
 
     .polaroid.active{
 
-      border:3px solid black;
-
-      transform:scale(1.06) rotate(0deg);
+      transform:scale(1.08) rotate(0deg);
 
     }
 
@@ -254,19 +248,19 @@
     <div class="polaroids">
 
       <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 1')">
-        <img src="polaroid1.jpg" alt="Polaroid 1">
+        <img src="polaroid1.png" alt="Polaroid 1">
       </div>
 
       <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 2')">
-        <img src="polaroid2.jpg" alt="Polaroid 2">
+        <img src="polaroid2.png" alt="Polaroid 2">
       </div>
 
       <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 3')">
-        <img src="polaroid3.jpg" alt="Polaroid 3">
+        <img src="polaroid3.png" alt="Polaroid 3">
       </div>
 
       <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 4')">
-        <img src="polaroid4.jpg" alt="Polaroid 4">
+        <img src="polaroid4.png" alt="Polaroid 4">
       </div>
 
     </div>
