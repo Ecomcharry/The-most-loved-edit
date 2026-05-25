@@ -2,7 +2,9 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
+
+  <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Escolhas</title>
@@ -17,12 +19,11 @@
 
     body{
 
-      width:100%;
-      min-height:100vh;
-
       background:white;
 
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
+
+      min-height:100vh;
 
       padding:60px 20px;
 
@@ -30,7 +31,6 @@
 
     .container{
 
-      width:100%;
       max-width:1400px;
 
       margin:0 auto;
@@ -49,11 +49,7 @@
 
       letter-spacing:2px;
 
-      color:black;
-
     }
-
-    /* POLAROIDS */
 
     .polaroids{
 
@@ -65,9 +61,9 @@
 
       gap:25px;
 
-      margin-bottom:60px;
-
       flex-wrap:wrap;
+
+      margin-bottom:50px;
 
     }
 
@@ -81,15 +77,15 @@
 
       border:3px solid transparent;
 
-      background:none;
-
-      padding:0;
-
-      box-shadow:none;
-
     }
 
-    /* ROTAÇÕES */
+    .polaroid img{
+
+      width:100%;
+
+      display:block;
+
+    }
 
     .polaroid:nth-child(1){
 
@@ -99,7 +95,7 @@
 
     .polaroid:nth-child(2){
 
-      transform:rotate(4deg);
+      transform:rotate(5deg);
 
     }
 
@@ -111,25 +107,9 @@
 
     .polaroid:nth-child(4){
 
-      transform:rotate(5deg);
+      transform:rotate(4deg);
 
     }
-
-    .polaroid img{
-
-      width:100%;
-
-      display:block;
-
-    }
-
-    .polaroid:hover{
-
-      transform:scale(1.04) rotate(0deg);
-
-    }
-
-    /* ATIVA */
 
     .polaroid.active{
 
@@ -137,99 +117,24 @@
 
     }
 
-    /* TEXTO */
-
-    .selected{
-
-      margin-bottom:35px;
-
-      font-size:16px;
-
-      letter-spacing:1px;
-
-      color:black;
-
-    }
-
-    /* BOTÃO */
-
     .button{
-
-      display:inline-flex;
-
-      align-items:center;
-      justify-content:center;
 
       width:220px;
       height:56px;
+
+      border:none;
+
+      border-radius:50px;
 
       background:black;
 
       color:white;
 
-      text-decoration:none;
-
-      border-radius:50px;
-
-      font-size:13px;
-      font-weight:bold;
-
       letter-spacing:3px;
 
-      border:none;
+      font-size:12px;
 
       cursor:pointer;
-
-      transition:0.3s;
-
-    }
-
-    .button:hover{
-
-      transform:translateY(-3px);
-
-    }
-
-    /* MOBILE */
-
-    @media(max-width:768px){
-
-      body{
-
-        padding:40px 20px;
-
-      }
-
-      h1{
-
-        font-size:30px;
-
-        margin-bottom:50px;
-
-      }
-
-      .polaroids{
-
-        flex-direction:column;
-
-        align-items:center;
-
-      }
-
-      .polaroid{
-
-        width:240px;
-
-      }
-
-      .button{
-
-        width:190px;
-        height:52px;
-
-        font-size:12px;
-
-      }
 
     }
 
@@ -243,39 +148,41 @@
 
     <h1>Escolha sua polaroid</h1>
 
-    <!-- POLAROIDS -->
-
     <div class="polaroids">
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid1.png')">
-        <img src="polaroid1.jpg" alt="Polaroid 1">
+      <div class="polaroid"
+        onclick="selectPolaroid(this,'Polaroid 1')">
+
+        <img src="polaroid1.png">
+
       </div>
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid2.png')">
-        <img src="polaroid2.jpg" alt="Polaroid 2">
+      <div class="polaroid"
+        onclick="selectPolaroid(this,'Polaroid 2')">
+
+        <img src="polaroid2.png">
+
       </div>
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid3.png')">
-        <img src="polaroid3.jpg" alt="Polaroid 3">
+      <div class="polaroid"
+        onclick="selectPolaroid(this,'Polaroid 3')">
+
+        <img src="polaroid3.png">
+
       </div>
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid4.png')">
-        <img src="polaroid4.jpg" alt="Polaroid 4">
+      <div class="polaroid"
+        onclick="selectPolaroid(this,'Polaroid 4')">
+
+        <img src="polaroid4.png">
+
       </div>
 
     </div>
 
-    <!-- TEXTO -->
-
-    <p class="selected" id="selectedText">
-      Nenhuma polaroid selecionada
-    </p>
-
-    <!-- BOTÃO -->
-
-    <a href="editor.html" class="button" onclick="savePolaroid()">
+    <button class="button" onclick="goToEditor()">
       CONTINUAR
-    </a>
+    </button>
 
   </div>
 
@@ -283,40 +190,36 @@
 
     let selectedPolaroid = '';
 
-    function selectPolaroid(element, image){
-
-      // remove ativa
+    function selectPolaroid(element,name){
 
       document.querySelectorAll('.polaroid').forEach(item => {
-        item.classList.remove('active');
-      });
 
-      // ativa atual
+        item.classList.remove('active');
+
+      });
 
       element.classList.add('active');
 
-      // salva escolha
-
-      selectedPolaroid = image;
-
-      localStorage.setItem('polaroidEscolhida', image);
-
-      // texto
-
-      document.getElementById('selectedText').innerText =
-        image + ' selecionada';
+      selectedPolaroid = name;
 
     }
 
-    function savePolaroid(){
+    function goToEditor(){
 
       if(selectedPolaroid === ''){
 
-        alert('Escolha uma polaroid antes de continuar');
+        alert('Escolha uma polaroid');
 
-        event.preventDefault();
+        return;
 
       }
+
+      localStorage.setItem(
+        'polaroid',
+        selectedPolaroid
+      );
+
+      window.location.href = 'editor.html';
 
     }
 
