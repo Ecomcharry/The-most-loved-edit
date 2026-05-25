@@ -45,8 +45,11 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* IMAGENS */
+/* 🔥 IMAGENS CORRIGIDAS */
 .polaroid-final img{
+  position:absolute;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
@@ -64,7 +67,7 @@ body{
   width:100%;
 }
 
-/* TEXTO LADO DIREITO (onde a seta aponta) */
+/* TEXTO LADO DIREITO */
 .note{
   position:absolute;
   right:-260px;
@@ -108,10 +111,7 @@ button{
     transform:scale(0.8);
   }
 
-  .note{
-    display:none;
-  }
-
+  .note,
   .arrow{
     display:none;
   }
@@ -125,7 +125,7 @@ button{
 
 <div class="container">
 
-  <!-- POLAROID + SETA -->
+  <!-- POLAROID -->
   <div class="preview-area">
 
     <div class="polaroid-final" id="polaroid">
@@ -142,7 +142,7 @@ button{
       <img src="arrow.png" alt="seta">
     </div>
 
-    <!-- texto lado direito -->
+    <!-- texto -->
     <div class="note">
       Aqui fica a área de escrita da composição escolhida pela cliente.
     </div>
@@ -169,25 +169,31 @@ button{
 
 <script>
 
-/* CARREGAR IMAGENS DO EDITOR */
+/* CARREGAR IMAGENS */
 function loadSavedImages(){
 
   const ids = ["img1","img2","img3","img4"];
 
-  ids.forEach((id,i) => {
+  ids.forEach(id => {
 
     const data = localStorage.getItem(id);
 
     if(data){
+
       const img = document.getElementById(id + "_final");
-      img.src = data;
+
+      if(img){
+        img.src = data;
+      }
+
     }
 
   });
 
 }
 
-loadSavedImages();
+/* garantir carregamento */
+window.addEventListener("load", loadSavedImages);
 
 /* BAIXAR IMAGEM */
 function downloadImage(){
@@ -211,7 +217,7 @@ function downloadImage(){
 /* RECOMEÇAR */
 function restart(){
   localStorage.clear();
-  window.location.href = "index.html"; // ajuste para sua página inicial
+  window.location.href = "index.html";
 }
 
 </script>
