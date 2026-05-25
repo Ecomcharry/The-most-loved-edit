@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Upload Fotos</title>
+<title>Editor</title>
 
 <style>
 
@@ -25,55 +25,76 @@ body{
 
   min-height:100vh;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:40px 20px;
+  padding:50px 20px;
 
 }
 
 .container{
 
-  width:100%;
+  max-width:600px;
 
-  max-width:500px;
-
-  text-align:center;
+  margin:0 auto;
 
 }
 
 h1{
 
-  font-size:40px;
+  text-align:center;
+
+  font-size:38px;
 
   font-weight:300;
 
   margin-bottom:50px;
 
-  letter-spacing:2px;
-
 }
 
-.controls{
+.photos{
 
   display:flex;
 
   flex-direction:column;
 
-  gap:24px;
+  gap:40px;
 
 }
 
-.upload-box{
+.photo-box{
 
   display:flex;
 
   flex-direction:column;
 
-  gap:12px;
+  gap:15px;
+
+}
+
+.preview{
+
+  width:100%;
+
+  height:340px;
+
+  background:#f3f3f3;
+
+  border-radius:24px;
+
+  overflow:hidden;
+
+  position:relative;
+
+}
+
+.preview img{
+
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  cursor:grab;
 
 }
 
@@ -82,11 +103,11 @@ h1{
   width:100%;
   height:58px;
 
-  border-radius:50px;
-
   background:black;
 
   color:white;
+
+  border-radius:50px;
 
   display:flex;
 
@@ -107,7 +128,7 @@ input[type=file]{
 
 }
 
-.adjust{
+.zoom{
 
   width:100%;
 
@@ -115,34 +136,7 @@ input[type=file]{
 
 }
 
-.preview{
-
-  width:100%;
-
-  height:240px;
-
-  background:#f3f3f3;
-
-  border-radius:24px;
-
-  overflow:hidden;
-
-  position:relative;
-
-}
-
-.preview img{
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  transform:scale(1);
-
-}
-
-.continue{
+.button{
 
   width:100%;
   height:58px;
@@ -161,23 +155,13 @@ input[type=file]{
 
   cursor:pointer;
 
-  margin-top:20px;
+  margin-top:40px;
 
 }
 
 .hidden{
 
   display:none;
-
-}
-
-@media(max-width:768px){
-
-  h1{
-
-    font-size:30px;
-
-  }
 
 }
 
@@ -191,11 +175,11 @@ input[type=file]{
 
 <h1>Insira suas fotos</h1>
 
-<div class="controls">
+<div class="photos" id="photosContainer">
 
   <!-- FOTO 1 -->
 
-  <div class="upload-box">
+  <div class="photo-box">
 
     <div class="preview">
       <img id="img1">
@@ -216,10 +200,10 @@ input[type=file]{
     <input
       type="range"
       min="1"
-      max="2"
+      max="3"
       step="0.1"
       value="1"
-      class="adjust"
+      class="zoom"
       oninput="zoomImage('img1', this.value)"
     >
 
@@ -227,7 +211,7 @@ input[type=file]{
 
   <!-- FOTO 2 -->
 
-  <div class="upload-box" id="box2">
+  <div class="photo-box" id="box2">
 
     <div class="preview">
       <img id="img2">
@@ -248,10 +232,10 @@ input[type=file]{
     <input
       type="range"
       min="1"
-      max="2"
+      max="3"
       step="0.1"
       value="1"
-      class="adjust"
+      class="zoom"
       oninput="zoomImage('img2', this.value)"
     >
 
@@ -259,7 +243,7 @@ input[type=file]{
 
   <!-- FOTO 3 -->
 
-  <div class="upload-box" id="box3">
+  <div class="photo-box" id="box3">
 
     <div class="preview">
       <img id="img3">
@@ -280,22 +264,52 @@ input[type=file]{
     <input
       type="range"
       min="1"
-      max="2"
+      max="3"
       step="0.1"
       value="1"
-      class="adjust"
+      class="zoom"
       oninput="zoomImage('img3', this.value)"
     >
 
   </div>
 
-  <!-- BOTÃO -->
+  <!-- FOTO 4 -->
 
-  <button class="continue">
-    CONTINUAR
-  </button>
+  <div class="photo-box hidden" id="box4">
+
+    <div class="preview">
+      <img id="img4">
+    </div>
+
+    <label class="upload">
+
+      INSERIR FOTO 4
+
+      <input
+        type="file"
+        accept="image/*"
+        onchange="loadImage(event,'img4')"
+      >
+
+    </label>
+
+    <input
+      type="range"
+      min="1"
+      max="3"
+      step="0.1"
+      value="1"
+      class="zoom"
+      oninput="zoomImage('img4', this.value)"
+    >
+
+  </div>
 
 </div>
+
+<button class="button">
+  CONTINUAR
+</button>
 
 </div>
 
@@ -304,13 +318,21 @@ input[type=file]{
 const selected =
 localStorage.getItem('polaroid');
 
-/* POLAROID COM 1 FOTO */
+/* POLAROID 2 = 1 FOTO */
 
 if(selected === 'Polaroid 2'){
 
   document.getElementById('box2').style.display = 'none';
-
   document.getElementById('box3').style.display = 'none';
+
+}
+
+/* POLAROID 4 = 4 FOTOS */
+
+if(selected === 'Polaroid 4'){
+
+  document.getElementById('box4')
+    .classList.remove('hidden');
 
 }
 
@@ -337,6 +359,57 @@ function zoomImage(id,value){
     `scale(${value})`;
 
 }
+
+/* MOVER FOTO */
+
+let active = null;
+
+document.querySelectorAll('.preview img').forEach(img => {
+
+  let isDown = false;
+
+  let offset = [0,0];
+
+  let start = [0,0];
+
+  img.addEventListener('mousedown', e => {
+
+    isDown = true;
+
+    active = img;
+
+    start = [
+      e.clientX - offset[0],
+      e.clientY - offset[1]
+    ];
+
+    img.style.cursor = 'grabbing';
+
+  });
+
+  document.addEventListener('mousemove', e => {
+
+    if(!isDown) return;
+
+    offset = [
+      e.clientX - start[0],
+      e.clientY - start[1]
+    ];
+
+    img.style.left = offset[0] + 'px';
+    img.style.top = offset[1] + 'px';
+
+  });
+
+  document.addEventListener('mouseup', () => {
+
+    isDown = false;
+
+    img.style.cursor = 'grab';
+
+  });
+
+});
 
 </script>
 
