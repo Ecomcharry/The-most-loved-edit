@@ -16,6 +16,7 @@
     }
 
     body{
+
       width:100%;
       min-height:100vh;
 
@@ -24,9 +25,11 @@
       font-family:Arial, sans-serif;
 
       overflow:hidden;
+
     }
 
     .hero{
+
       position:relative;
 
       width:100%;
@@ -37,11 +40,13 @@
       justify-content:center;
 
       overflow:hidden;
+
     }
 
-    /* IMAGEM DE FUNDO */
+    /* IMAGEM */
 
     .hero img{
+
       position:absolute;
 
       top:0;
@@ -51,23 +56,21 @@
       height:100%;
 
       object-fit:cover;
+
     }
 
-    /* OVERLAY */
+    /* REMOVE ESCURECIMENTO */
 
     .overlay{
-      position:absolute;
 
-      inset:0;
+      display:none;
 
-      background:rgba(0,0,0,0.35);
-
-      z-index:1;
     }
 
     /* CONTEÚDO */
 
     .content{
+
       position:relative;
 
       z-index:2;
@@ -75,28 +78,9 @@
       text-align:center;
 
       padding:20px;
-    }
 
-    h1{
-      color:white;
+      margin-top:280px;
 
-      font-size:52px;
-
-      margin-bottom:20px;
-
-      letter-spacing:2px;
-    }
-
-    p{
-      color:white;
-
-      font-size:16px;
-
-      line-height:1.6;
-
-      opacity:0.9;
-
-      margin-bottom:35px;
     }
 
     /* BOTÃO */
@@ -104,6 +88,7 @@
     .button{
 
       display:inline-flex;
+
       align-items:center;
       justify-content:center;
 
@@ -124,29 +109,32 @@
       letter-spacing:3px;
 
       transition:0.3s;
+
     }
 
     .button:hover{
+
       transform:translateY(-3px);
+
     }
 
     /* MOBILE */
 
     @media(max-width:768px){
 
-      h1{
-        font-size:38px;
-      }
+      .content{
 
-      p{
-        font-size:14px;
+        margin-top:320px;
+
       }
 
       .button{
+
         width:190px;
         height:52px;
 
         font-size:12px;
+
       }
 
     }
@@ -167,8 +155,6 @@
 
     <!-- CONTEÚDO -->
     <div class="content">
-
-      <h1>Charmy Letter</h1>
 
       <!-- BOTÃO -->
       <a href="looks.html" class="button">
