@@ -31,12 +31,9 @@ body{
 .preview-area{
   width:320px;
   height:420px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-/* POLAROID FINAL */
+/* BASE POLAROID */
 .polaroid-final{
   width:100%;
   height:100%;
@@ -47,20 +44,60 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* IMAGENS (CORRETO AGORA) */
+/* IMAGENS */
 .polaroid-final img{
   position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
+/* LAYOUTS */
+
+/* 1 FOTO */
+.layout-1 img{
+  width:100%;
+  height:100%;
+}
+
+/* 2 FOTOS */
+.layout-2 img{
+  width:100%;
+  height:50%;
+}
+.layout-2 img:nth-child(1){ top:0; }
+.layout-2 img:nth-child(2){ top:50%; }
+
+/* 3 FOTOS */
+.layout-3 img:nth-child(1){
+  width:100%;
+  height:50%;
+  top:0;
+}
+.layout-3 img:nth-child(2),
+.layout-3 img:nth-child(3){
+  width:50%;
+  height:50%;
+  top:50%;
+}
+.layout-3 img:nth-child(2){ left:0; }
+.layout-3 img:nth-child(3){ left:50%; }
+
+/* 4 FOTOS */
+.layout-4 img{
+  width:50%;
+  height:50%;
+}
+.layout-4 img:nth-child(1){ top:0; left:0; }
+.layout-4 img:nth-child(2){ top:0; left:50%; }
+.layout-4 img:nth-child(3){ top:50%; left:0; }
+.layout-4 img:nth-child(4){ top:50%; left:50%; }
+
 /* BOTÕES */
 .buttons{
   display:flex;
   gap:15px;
+  margin-top:30px;
 }
 
 button{
@@ -132,8 +169,28 @@ button{
 
 <script>
 
-/* CARREGAR IMAGENS DO LOCALSTORAGE */
-function loadSavedImages(){
+/* CARREGAR LAYOUT + IMAGENS */
+function init(){
+
+  const layout = localStorage.getItem("polaroid") || "Polaroid 1";
+
+  const container = document.getElementById("polaroid");
+
+  if(layout.includes("2")){
+    container.classList.add("layout-2");
+  }
+
+  if(layout.includes("3")){
+    container.classList.add("layout-3");
+  }
+
+  if(layout.includes("4")){
+    container.classList.add("layout-4");
+  }
+
+  if(layout.includes("1")){
+    container.classList.add("layout-1");
+  }
 
   const ids = ["img1","img2","img3","img4"];
 
@@ -151,7 +208,7 @@ function loadSavedImages(){
 
 }
 
-window.addEventListener("load", loadSavedImages);
+window.addEventListener("load", init);
 
 /* DOWNLOAD */
 function downloadImage(){
