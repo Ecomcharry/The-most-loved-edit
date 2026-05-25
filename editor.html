@@ -92,21 +92,30 @@ h1{
 
   position:absolute;
 
-  top:0;
-  left:0;
+  top:50%;
+  left:50%;
 
-  width:100%;
-  height:100%;
+  width:auto;
 
-  object-fit:cover;
+  height:auto;
+
+  min-width:100%;
+
+  min-height:100%;
+
+  max-width:none;
+
+  max-height:none;
+
+  transform:
+  translate(-50%,-50%)
+  scale(1);
 
   cursor:grab;
 
   touch-action:none;
 
-  transform:
-  translate(0px,0px)
-  scale(1);
+  user-select:none;
 
 }
 
@@ -509,13 +518,13 @@ function updateTransform(img){
   img.dataset.scale || 1;
 
   const x =
-  img.dataset.x || 0;
+  parseFloat(img.dataset.x || 0);
 
   const y =
-  img.dataset.y || 0;
+  parseFloat(img.dataset.y || 0);
 
   img.style.transform =
-  `translate(${x}px, ${y}px) scale(${scale})`;
+  `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
 
 }
 
