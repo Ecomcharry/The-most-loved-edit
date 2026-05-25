@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Definido</title>
+
+<style>
+
+body{
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+  background:url("final.jpg") no-repeat center center fixed;
+  background-size:cover;
+}
+
+/* CENTRAL */
+.container{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:30px;
+}
+
+/* ÁREA DA POLAROID */
+.preview-area{
+  position:relative;
+  width:320px;
+  height:420px;
+}
+
+/* POLAROID FINAL */
+.polaroid-final{
+  width:100%;
+  height:100%;
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* IMAGENS */
+.polaroid-final img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* SETA */
+.arrow{
+  position:absolute;
+  right:-120px;
+  top:40%;
+  width:100px;
+}
+
+.arrow img{
+  width:100%;
+}
+
+/* TEXTO LADO DIREITO (onde a seta aponta) */
+.note{
+  position:absolute;
+  right:-260px;
+  top:38%;
+  width:200px;
+  color:white;
+  font-size:14px;
+  line-height:1.4;
+}
+
+/* BOTÕES */
+.buttons{
+  display:flex;
+  gap:15px;
+}
+
+button{
+  width:160px;
+  height:50px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+.download{
+  background:#750014;
+  color:white;
+}
+
+.restart{
+  background:white;
+  color:#750014;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .preview-area{
+    transform:scale(0.8);
+  }
+
+  .note{
+    display:none;
+  }
+
+  .arrow{
+    display:none;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- POLAROID + SETA -->
+  <div class="preview-area">
+
+    <div class="polaroid-final" id="polaroid">
+
+      <img id="img1_final">
+      <img id="img2_final">
+      <img id="img3_final">
+      <img id="img4_final">
+
+    </div>
+
+    <!-- seta -->
+    <div class="arrow">
+      <img src="arrow.png" alt="seta">
+    </div>
+
+    <!-- texto lado direito -->
+    <div class="note">
+      Aqui fica a área de escrita da composição escolhida pela cliente.
+    </div>
+
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="buttons">
+
+    <button class="download" onclick="downloadImage()">
+      BAIXAR
+    </button>
+
+    <button class="restart" onclick="restart()">
+      RECOMEÇAR
+    </button>
+
+  </div>
+
+</div>
+
+<!-- html2canvas -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+
+/* CARREGAR IMAGENS DO EDITOR */
+function loadSavedImages(){
+
+  const ids = ["img1","img2","img3","img4"];
+
+  ids.forEach((id,i) => {
+
+    const data = localStorage.getItem(id);
+
+    if(data){
+      const img = document.getElementById(id + "_final");
+      img.src = data;
+    }
+
+  });
+
+}
+
+loadSavedImages();
+
+/* BAIXAR IMAGEM */
+function downloadImage(){
+
+  const element = document.getElementById("polaroid");
+
+  html2canvas(element, {
+    useCORS:true,
+    scale:2
+  }).then(canvas => {
+
+    const link = document.createElement("a");
+    link.download = "polaroid.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+  });
+
+}
+
+/* RECOMEÇAR */
+function restart(){
+  localStorage.clear();
+  window.location.href = "index.html"; // ajuste para sua página inicial
+}
+
+</script>
+
+</body>
+</html>
