@@ -61,6 +61,8 @@ h1{
 
 }
 
+/* POLAROID */
+
 .polaroid{
 
   position:relative;
@@ -81,6 +83,8 @@ h1{
 
 }
 
+/* SLOTS */
+
 .slot{
 
   position:absolute;
@@ -96,9 +100,13 @@ h1{
 
   object-fit:cover;
 
+  transform:scale(1);
+
+  transition:0.2s;
+
 }
 
-/* 3 FOTOS */
+/* POLAROID 3 FOTOS */
 
 .slot1{
 
@@ -130,7 +138,7 @@ h1{
 
 }
 
-/* 1 FOTO */
+/* POLAROID 1 FOTO */
 
 .single{
 
@@ -142,13 +150,15 @@ h1{
 
 }
 
+/* CONTROLES */
+
 .controls{
 
   display:flex;
 
   flex-direction:column;
 
-  gap:18px;
+  gap:16px;
 
   align-items:center;
 
@@ -184,6 +194,14 @@ input[type=file]{
 
 }
 
+.adjust{
+
+  width:240px;
+
+  accent-color:#750014;
+
+}
+
 .continue{
 
   width:240px;
@@ -205,6 +223,28 @@ input[type=file]{
 
 }
 
+.hidden{
+
+  display:none;
+
+}
+
+@media(max-width:768px){
+
+  h1{
+
+    font-size:30px;
+
+  }
+
+  .polaroid{
+
+    width:270px;
+
+  }
+
+}
+
 </style>
 
 </head>
@@ -216,6 +256,8 @@ input[type=file]{
 <h1>Personalize sua polaroid</h1>
 
 <div class="editor">
+
+  <!-- POLAROID -->
 
   <div class="polaroid">
 
@@ -243,9 +285,11 @@ input[type=file]{
 
   <div class="controls">
 
+    <!-- FOTO 1 -->
+
     <label class="upload">
 
-      FOTO 1
+      INSERIR FOTO 1
 
       <input
         type="file"
@@ -255,9 +299,24 @@ input[type=file]{
 
     </label>
 
+    <!-- AJUSTE FOTO 1 -->
+
+    <input
+      type="range"
+      min="1"
+      max="2"
+      step="0.1"
+      value="1"
+      class="adjust"
+      id="adjust1"
+      oninput="zoomImage('img1', this.value)"
+    >
+
+    <!-- FOTO 2 -->
+
     <label class="upload" id="upload2">
 
-      FOTO 2
+      INSERIR FOTO 2
 
       <input
         type="file"
@@ -267,9 +326,24 @@ input[type=file]{
 
     </label>
 
+    <!-- AJUSTE FOTO 2 -->
+
+    <input
+      type="range"
+      min="1"
+      max="2"
+      step="0.1"
+      value="1"
+      class="adjust"
+      id="adjust2"
+      oninput="zoomImage('img2', this.value)"
+    >
+
+    <!-- FOTO 3 -->
+
     <label class="upload" id="upload3">
 
-      FOTO 3
+      INSERIR FOTO 3
 
       <input
         type="file"
@@ -278,6 +352,21 @@ input[type=file]{
       >
 
     </label>
+
+    <!-- AJUSTE FOTO 3 -->
+
+    <input
+      type="range"
+      min="1"
+      max="2"
+      step="0.1"
+      value="1"
+      class="adjust"
+      id="adjust3"
+      oninput="zoomImage('img3', this.value)"
+    >
+
+    <!-- CONTINUAR -->
 
     <button class="continue">
       CONTINUAR
@@ -302,6 +391,12 @@ document.getElementById('upload2');
 
 const upload3 =
 document.getElementById('upload3');
+
+const adjust2 =
+document.getElementById('adjust2');
+
+const adjust3 =
+document.getElementById('adjust3');
 
 const slot1 =
 document.getElementById('slot1');
@@ -331,12 +426,13 @@ if(selected === 'Polaroid 2'){
   slot1.classList.add('single');
 
   slot2.style.display = 'none';
-
   slot3.style.display = 'none';
 
   upload2.style.display = 'none';
-
   upload3.style.display = 'none';
+
+  adjust2.style.display = 'none';
+  adjust3.style.display = 'none';
 
 }
 
@@ -356,6 +452,8 @@ if(selected === 'Polaroid 4'){
 
 }
 
+/* UPLOAD */
+
 function loadImage(event,id){
 
   const file = event.target.files[0];
@@ -366,6 +464,15 @@ function loadImage(event,id){
       URL.createObjectURL(file);
 
   }
+
+}
+
+/* AJUSTE */
+
+function zoomImage(id, value){
+
+  document.getElementById(id).style.transform =
+    `scale(${value})`;
 
 }
 
