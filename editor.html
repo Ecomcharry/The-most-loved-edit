@@ -57,7 +57,7 @@ h1{
   position:relative;
 }
 
-/* 🔥 IMAGEM (EDITOR REAL) */
+/* IMAGEM EDITOR */
 .preview img{
   position:absolute;
   top:50%;
@@ -204,13 +204,16 @@ input[type=file]{
 
 </div>
 
-<button class="button">CONTINUAR</button>
+<!-- 🔥 BOTÃO CORRIGIDO -->
+<button class="button" onclick="goNext()">
+  CONTINUAR
+</button>
 
 </div>
 
 <script>
 
-/* seleção polaroid */
+/* polaroid selecionada */
 const selected = localStorage.getItem('polaroid');
 
 if(selected === 'Polaroid 2'){
@@ -231,7 +234,6 @@ function loadImage(event,id){
     const img = document.getElementById(id);
     img.src = URL.createObjectURL(file);
 
-    // reset inicial padrão editor
     img.dataset.scale = 1;
     img.dataset.x = 0;
     img.dataset.y = 0;
@@ -298,7 +300,7 @@ document.querySelectorAll('.preview img').forEach(img => {
 
 });
 
-/* transform final */
+/* transform */
 function updateTransform(img){
 
   const scale = parseFloat(img.dataset.scale || 1);
@@ -307,6 +309,21 @@ function updateTransform(img){
 
   img.style.transform =
     `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
+}
+
+/* 🔥 BOTÃO CONTINUAR */
+function goNext(){
+
+  const ids = ["img1","img2","img3","img4"];
+
+  ids.forEach(id => {
+    const img = document.getElementById(id);
+    if(img && img.src){
+      localStorage.setItem(id, img.src);
+    }
+  });
+
+  window.location.href = "definido.html";
 }
 
 </script>
