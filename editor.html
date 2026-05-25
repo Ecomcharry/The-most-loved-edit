@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Editor Polaroid</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+
+      width:100%;
+      min-height:100vh;
+
+      background:white;
+
+      font-family:Arial, sans-serif;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      padding:40px 20px;
+
+    }
+
+    .container{
+
+      width:100%;
+      max-width:1200px;
+
+      text-align:center;
+
+    }
+
+    h1{
+
+      font-size:42px;
+
+      font-weight:300;
+
+      margin-bottom:50px;
+
+      letter-spacing:2px;
+
+    }
+
+    /* ÁREA */
+
+    .editor-area{
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      gap:80px;
+
+      flex-wrap:wrap;
+
+    }
+
+    /* POLAROID */
+
+    .polaroid{
+
+      position:relative;
+
+      width:320px;
+
+    }
+
+    .polaroid img.frame{
+
+      width:100%;
+
+      display:block;
+
+      position:relative;
+
+      z-index:2;
+
+      pointer-events:none;
+
+    }
+
+    /* FOTO */
+
+    .photo-area{
+
+      position:absolute;
+
+      top:55px;
+      left:50%;
+
+      transform:translateX(-50%);
+
+      width:180px;
+      height:230px;
+
+      overflow:hidden;
+
+      z-index:1;
+
+      cursor:grab;
+
+    }
+
+    .photo-area img{
+
+      position:absolute;
+
+      top:0;
+      left:0;
+
+      width:100%;
+      height:100%;
+
+      object-fit:cover;
+
+      user-select:none;
+
+    }
+
+    /* CONTROLES */
+
+    .controls{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:20px;
+
+      align-items:center;
+
+    }
+
+    input[type="file"]{
+
+      display:none;
+
+    }
+
+    .upload-btn{
+
+      width:220px;
+      height:56px;
+
+      border-radius:50px;
+
+      border:none;
+
+      background:black;
+
+      color:white;
+
+      font-size:12px;
+
+      letter-spacing:3px;
+
+      cursor:pointer;
+
+    }
+
+    .zoom{
+
+      width:220px;
+
+    }
+
+    .button{
+
+      width:220px;
+      height:56px;
+
+      border-radius:50px;
+
+      border:none;
+
+      background:#750014;
+
+      color:white;
+
+      font-size:12px;
+
+      letter-spacing:3px;
+
+      cursor:pointer;
+
+    }
+
+    @media(max-width:768px){
+
+      h1{
+
+        font-size:30px;
+
+      }
+
+      .polaroid{
+
+        width:260px;
+
+      }
+
+      .photo-area{
+
+        width:145px;
+        height:190px;
+
+        top:45px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Personalize sua polaroid</h1>
+
+    <div class="editor-area">
+
+      <!-- POLAROID -->
+
+      <div class="polaroid">
+
+        <!-- FOTO -->
+
+        <div class="photo-area" id="photoArea">
+
+          <img id="preview">
+
+        </div>
+
+        <!-- FRAME -->
+
+        <img src="polaroid1.png" class="frame">
+
+      </div>
+
+      <!-- CONTROLES -->
+
+      <div class="controls">
+
+        <label class="upload-btn">
+
+          ENVIAR FOTO
+
+          <input type="file" id="upload" accept="image/*">
+
+        </label>
+
+        <input
+          type="range"
+          min="1"
+          max="2"
+          step="0.1"
+          value="1"
+          class="zoom"
+          id="zoom"
+        >
+
+        <button class="button">
+          CONTINUAR
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const upload = document.getElementById('upload');
+    const preview = document.getElementById('preview');
+    const zoom = document.getElementById('zoom');
+
+    let scale = 1;
+
+    upload.addEventListener('change', function(e){
+
+      const file = e.target.files[0];
+
+      if(file){
+
+        preview.src = URL.createObjectURL(file);
+
+      }
+
+    });
+
+    zoom.addEventListener('input', function(){
+
+      scale = zoom.value;
+
+      preview.style.transform = `scale(${scale})`;
+
+    });
+
+  </script>
+
+</body>
+
+</html>
