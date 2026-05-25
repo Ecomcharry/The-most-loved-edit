@@ -247,19 +247,19 @@
 
     <div class="polaroids">
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 1')">
+      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid1.png')">
         <img src="polaroid1.jpg" alt="Polaroid 1">
       </div>
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 2')">
+      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid2.png')">
         <img src="polaroid2.jpg" alt="Polaroid 2">
       </div>
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 3')">
+      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid3.png')">
         <img src="polaroid3.jpg" alt="Polaroid 3">
       </div>
 
-      <div class="polaroid" onclick="selectPolaroid(this, 'Polaroid 4')">
+      <div class="polaroid" onclick="selectPolaroid(this, 'polaroid4.png')">
         <img src="polaroid4.jpg" alt="Polaroid 4">
       </div>
 
@@ -273,30 +273,50 @@
 
     <!-- BOTÃO -->
 
-    <button class="button">
+    <a href="editor.html" class="button" onclick="savePolaroid()">
       CONTINUAR
-    </button>
+    </a>
 
   </div>
 
   <script>
 
-    function selectPolaroid(element, name){
+    let selectedPolaroid = '';
 
-      // remove ativa das outras
+    function selectPolaroid(element, image){
+
+      // remove ativa
 
       document.querySelectorAll('.polaroid').forEach(item => {
         item.classList.remove('active');
       });
 
-      // adiciona ativa
+      // ativa atual
 
       element.classList.add('active');
 
-      // muda texto
+      // salva escolha
+
+      selectedPolaroid = image;
+
+      localStorage.setItem('polaroidEscolhida', image);
+
+      // texto
 
       document.getElementById('selectedText').innerText =
-        name + ' selecionada';
+        image + ' selecionada';
+
+    }
+
+    function savePolaroid(){
+
+      if(selectedPolaroid === ''){
+
+        alert('Escolha uma polaroid antes de continuar');
+
+        event.preventDefault();
+
+      }
 
     }
 
