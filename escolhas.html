@@ -31,7 +31,7 @@
     .container{
 
       width:100%;
-      max-width:1200px;
+      max-width:1400px;
 
       margin:0 auto;
 
@@ -41,11 +41,11 @@
 
     h1{
 
-      font-size:38px;
+      font-size:42px;
 
       font-weight:300;
 
-      margin-bottom:50px;
+      margin-bottom:70px;
 
       letter-spacing:2px;
 
@@ -53,33 +53,67 @@
 
     }
 
-    /* GRID */
+    /* POLAROIDS */
 
     .polaroids{
 
-      display:grid;
+      display:flex;
 
-      grid-template-columns:repeat(2, 1fr);
+      justify-content:center;
 
-      gap:30px;
+      align-items:flex-start;
 
-      margin-bottom:50px;
+      gap:25px;
+
+      margin-bottom:60px;
+
+      flex-wrap:wrap;
 
     }
 
-    /* POLAROID */
-
     .polaroid{
 
-      border:3px solid transparent;
+      width:220px;
 
-      border-radius:16px;
+      background:white;
 
-      overflow:hidden;
+      padding:12px 12px 24px 12px;
+
+      border-radius:6px;
+
+      box-shadow:0 10px 30px rgba(0,0,0,0.08);
 
       cursor:pointer;
 
       transition:0.3s;
+
+      border:3px solid transparent;
+
+    }
+
+    /* ROTAÇÕES */
+
+    .polaroid:nth-child(1){
+
+      transform:rotate(-6deg);
+
+    }
+
+    .polaroid:nth-child(2){
+
+      transform:rotate(4deg);
+
+    }
+
+    .polaroid:nth-child(3){
+
+      transform:rotate(-3deg);
+
+    }
+
+    .polaroid:nth-child(4){
+
+      transform:rotate(5deg);
 
     }
 
@@ -89,11 +123,13 @@
 
       display:block;
 
+      border-radius:2px;
+
     }
 
     .polaroid:hover{
 
-      transform:translateY(-5px);
+      transform:scale(1.04) rotate(0deg);
 
     }
 
@@ -103,7 +139,7 @@
 
       border:3px solid black;
 
-      transform:scale(1.02);
+      transform:scale(1.06) rotate(0deg);
 
     }
 
@@ -111,7 +147,7 @@
 
     .selected{
 
-      margin-bottom:30px;
+      margin-bottom:35px;
 
       font-size:16px;
 
@@ -164,15 +200,31 @@
 
     @media(max-width:768px){
 
+      body{
+
+        padding:40px 20px;
+
+      }
+
       h1{
 
-        font-size:28px;
+        font-size:30px;
+
+        margin-bottom:50px;
 
       }
 
       .polaroids{
 
-        grid-template-columns:1fr;
+        flex-direction:column;
+
+        align-items:center;
+
+      }
+
+      .polaroid{
+
+        width:240px;
 
       }
 
