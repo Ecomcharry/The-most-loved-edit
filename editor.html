@@ -1,4 +1,9 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Editor</title>
 
 <style>
@@ -10,219 +15,120 @@
 }
 
 body{
-
   background:white;
-
   font-family:Arial,sans-serif;
-
   min-height:100vh;
-
   padding:40px 20px;
-
 }
 
 .container{
-
   max-width:1100px;
-
   margin:0 auto;
-
 }
 
 h1{
-
   text-align:center;
-
   font-size:34px;
-
   font-weight:300;
-
   margin-bottom:40px;
-
   letter-spacing:1px;
-
 }
 
 /* GRID */
-
 .photos{
-
   display:grid;
-
-  grid-template-columns:
-  repeat(auto-fit,minmax(220px,1fr));
-
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
-
 }
 
 /* BOX */
-
 .photo-box{
-
   display:flex;
-
   flex-direction:column;
-
   gap:14px;
-
 }
 
 /* PREVIEW */
-
 .preview{
-
   width:100%;
-
   height:160px;
-
   background:#f4f4f4;
-
   border-radius:24px;
-
   overflow:hidden;
-
   position:relative;
-
 }
 
-/* FOTO */
-
+/* IMAGEM (CORRIGIDO) */
 .preview img{
-
   position:absolute;
-
   top:50%;
   left:50%;
 
-  width:auto;
+  width:100%;
+  height:100%;
 
-  height:auto;
+  object-fit:contain;
 
-  min-width:100%;
-
-  min-height:100%;
-
-  max-width:none;
-
-  max-height:none;
-
-  transform:
-  translate(-50%,-50%)
-  scale(1);
+  transform:translate(-50%,-50%) scale(1);
 
   cursor:grab;
-
   touch-action:none;
-
   user-select:none;
-
 }
 
-/* BOTÃO UPLOAD */
-
+/* UPLOAD */
 .upload{
-
   width:100%;
   height:54px;
-
   background:black;
-
   color:white;
-
   border-radius:50px;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   letter-spacing:3px;
-
   font-size:11px;
-
   cursor:pointer;
-
 }
 
 input[type=file]{
-
   display:none;
-
 }
 
 /* ZOOM */
-
 .zoom{
-
   width:100%;
-
   accent-color:#750014;
-
 }
 
 /* BOTÃO */
-
 .button{
-
   width:100%;
   max-width:320px;
   height:56px;
-
   border:none;
-
   border-radius:50px;
-
   background:#750014;
-
   color:white;
-
   letter-spacing:3px;
-
   font-size:12px;
-
   cursor:pointer;
-
   display:block;
-
   margin:40px auto 0 auto;
-
 }
 
 .hidden{
-
   display:none;
-
 }
 
 /* MOBILE */
-
 @media(max-width:768px){
-
-  body{
-
-    padding:30px 16px;
-
-  }
-
-  h1{
-
-    font-size:28px;
-
-    margin-bottom:30px;
-
-  }
-
-  .preview{
-
-    height:140px;
-
-  }
-
+  body{padding:30px 16px;}
+  h1{font-size:28px;margin-bottom:30px;}
+  .preview{height:140px;}
 }
 
 </style>
-
 </head>
 
 <body>
@@ -234,302 +140,178 @@ input[type=file]{
 <div class="photos">
 
   <!-- FOTO 1 -->
-
   <div class="photo-box">
-
     <div class="preview">
       <img id="img1">
     </div>
 
     <label class="upload">
-
       INSERIR FOTO 1
-
-      <input
-        type="file"
-        accept="image/*"
-        onchange="loadImage(event,'img1')"
-      >
-
+      <input type="file" accept="image/*" onchange="loadImage(event,'img1')">
     </label>
 
-    <input
-      type="range"
-      min="1"
-      max="3"
-      step="0.1"
-      value="1"
+    <input type="range" min="1" max="3" step="0.1" value="1"
       class="zoom"
-      oninput="zoomImage('img1', this.value)"
-    >
-
+      oninput="zoomImage('img1', this.value)">
   </div>
 
   <!-- FOTO 2 -->
-
   <div class="photo-box" id="box2">
-
     <div class="preview">
       <img id="img2">
     </div>
 
     <label class="upload">
-
       INSERIR FOTO 2
-
-      <input
-        type="file"
-        accept="image/*"
-        onchange="loadImage(event,'img2')"
-      >
-
+      <input type="file" accept="image/*" onchange="loadImage(event,'img2')">
     </label>
 
-    <input
-      type="range"
-      min="1"
-      max="3"
-      step="0.1"
-      value="1"
+    <input type="range" min="1" max="3" step="0.1" value="1"
       class="zoom"
-      oninput="zoomImage('img2', this.value)"
-    >
-
+      oninput="zoomImage('img2', this.value)">
   </div>
 
   <!-- FOTO 3 -->
-
   <div class="photo-box" id="box3">
-
     <div class="preview">
       <img id="img3">
     </div>
 
     <label class="upload">
-
       INSERIR FOTO 3
-
-      <input
-        type="file"
-        accept="image/*"
-        onchange="loadImage(event,'img3')"
-      >
-
+      <input type="file" accept="image/*" onchange="loadImage(event,'img3')">
     </label>
 
-    <input
-      type="range"
-      min="1"
-      max="3"
-      step="0.1"
-      value="1"
+    <input type="range" min="1" max="3" step="0.1" value="1"
       class="zoom"
-      oninput="zoomImage('img3', this.value)"
-    >
-
+      oninput="zoomImage('img3', this.value)">
   </div>
 
   <!-- FOTO 4 -->
-
   <div class="photo-box hidden" id="box4">
-
     <div class="preview">
       <img id="img4">
     </div>
 
     <label class="upload">
-
       INSERIR FOTO 4
-
-      <input
-        type="file"
-        accept="image/*"
-        onchange="loadImage(event,'img4')"
-      >
-
+      <input type="file" accept="image/*" onchange="loadImage(event,'img4')">
     </label>
 
-    <input
-      type="range"
-      min="1"
-      max="3"
-      step="0.1"
-      value="1"
+    <input type="range" min="1" max="3" step="0.1" value="1"
       class="zoom"
-      oninput="zoomImage('img4', this.value)"
-    >
-
+      oninput="zoomImage('img4', this.value)">
   </div>
 
 </div>
 
-<button class="button">
-  CONTINUAR
-</button>
+<button class="button">CONTINUAR</button>
 
 </div>
 
 <script>
 
-/* DEFINE QUANTIDADE */
-
-const selected =
-localStorage.getItem('polaroid');
-
-/* POLAROID 2 = 1 FOTO */
+/* quantidade */
+const selected = localStorage.getItem('polaroid');
 
 if(selected === 'Polaroid 2'){
-
   document.getElementById('box2').style.display = 'none';
-
   document.getElementById('box3').style.display = 'none';
-
 }
-
-/* POLAROID 4 = 4 FOTOS */
 
 if(selected === 'Polaroid 4'){
-
-  document.getElementById('box4')
-  .classList.remove('hidden');
-
+  document.getElementById('box4').classList.remove('hidden');
 }
 
-/* UPLOAD */
-
+/* upload */
 function loadImage(event,id){
 
   const file = event.target.files[0];
 
   if(file){
+    const img = document.getElementById(id);
+    img.src = URL.createObjectURL(file);
 
-    const img =
-    document.getElementById(id);
+    /* RESET IMPORTANTE */
+    img.dataset.scale = 1;
+    img.dataset.x = 0;
+    img.dataset.y = 0;
 
-    img.src =
-    URL.createObjectURL(file);
-
+    updateTransform(img);
   }
-
 }
 
-/* ZOOM */
-
+/* zoom */
 function zoomImage(id,value){
 
-  const img =
-  document.getElementById(id);
-
+  const img = document.getElementById(id);
   img.dataset.scale = value;
-
   updateTransform(img);
-
 }
 
-/* DRAG */
-
-document.querySelectorAll('.preview img')
-.forEach(img => {
+/* drag */
+document.querySelectorAll('.preview img').forEach(img => {
 
   let isDragging = false;
-
   let startX = 0;
   let startY = 0;
-
   let currentX = 0;
   let currentY = 0;
 
   img.dataset.scale = 1;
 
   function start(e){
-
     isDragging = true;
 
-    const clientX =
-    e.type.includes('mouse')
-    ? e.clientX
-    : e.touches[0].clientX;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
 
-    const clientY =
-    e.type.includes('mouse')
-    ? e.clientY
-    : e.touches[0].clientY;
-
-    startX = clientX - currentX;
-    startY = clientY - currentY;
-
+    startX = x - currentX;
+    startY = y - currentY;
   }
 
   function move(e){
-
     if(!isDragging) return;
-
     e.preventDefault();
 
-    const clientX =
-    e.type.includes('mouse')
-    ? e.clientX
-    : e.touches[0].clientX;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
 
-    const clientY =
-    e.type.includes('mouse')
-    ? e.clientY
-    : e.touches[0].clientY;
-
-    currentX = clientX - startX;
-    currentY = clientY - startY;
+    currentX = x - startX;
+    currentY = y - startY;
 
     img.dataset.x = currentX;
     img.dataset.y = currentY;
 
     updateTransform(img);
-
   }
 
   function end(){
-
     isDragging = false;
-
   }
 
   img.addEventListener('mousedown', start);
-
   window.addEventListener('mousemove', move);
-
   window.addEventListener('mouseup', end);
 
   img.addEventListener('touchstart', start);
-
-  window.addEventListener(
-    'touchmove',
-    move,
-    {passive:false}
-  );
-
+  window.addEventListener('touchmove', move, {passive:false});
   window.addEventListener('touchend', end);
 
 });
 
-/* TRANSFORM */
-
+/* transform */
 function updateTransform(img){
 
-  const scale =
-  img.dataset.scale || 1;
-
-  const x =
-  parseFloat(img.dataset.x || 0);
-
-  const y =
-  parseFloat(img.dataset.y || 0);
+  const scale = img.dataset.scale || 1;
+  const x = parseFloat(img.dataset.x || 0);
+  const y = parseFloat(img.dataset.y || 0);
 
   img.style.transform =
-  `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
-
+    `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
 }
 
 </script>
 
 </body>
-
 </html>
