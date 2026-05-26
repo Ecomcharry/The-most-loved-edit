@@ -48,31 +48,38 @@ body{
   gap:35px;
 }
 
-/* ÁREA FINAL */
+/* POLAROID */
 
 .polaroid-wrapper{
 
   position:relative;
 
-  width:min(90vw,340px);
+  width:min(90vw,360px);
 
   aspect-ratio:3/4;
 }
 
-/* FOTO */
+/* ÁREA DA FOTO */
 
 .photo-layer{
 
   position:absolute;
 
-  inset:0;
+  /* 🔥 AJUSTE DA ÁREA INTERNA */
+  top:8%;
+  left:8%;
+
+  width:84%;
+  height:67%;
 
   overflow:hidden;
 
-  border-radius:24px;
+  z-index:2;
+
+  border-radius:8px;
 }
 
-/* IMAGENS */
+/* FOTO */
 
 .photo-layer img{
 
@@ -90,12 +97,12 @@ body{
   max-width:none;
   max-height:none;
 
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%) scale(1);
 
-  object-fit:unset;
+  object-fit:cover;
 }
 
-/* MOLDURA POLAROID */
+/* MOLDURA */
 
 .polaroid-frame{
 
@@ -242,7 +249,7 @@ function init(){
   const frame =
   document.getElementById('frame');
 
-  /* DEFINE MOLDURA */
+  /* DEFINE A POLAROID */
 
   if(selected === 'Polaroid 1'){
     frame.src = 'polaroid1.png';
@@ -260,7 +267,7 @@ function init(){
     frame.src = 'polaroid4.png';
   }
 
-  /* IMAGENS */
+  /* CARREGA AS IMAGENS */
 
   const ids =
   ['img1','img2','img3','img4'];
@@ -276,6 +283,8 @@ function init(){
     if(data){
 
       img.src = data;
+
+      /* AJUSTES SALVOS */
 
       const x =
       localStorage.getItem(id+'_x') || 0;
