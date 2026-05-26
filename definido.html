@@ -17,41 +17,64 @@
 }
 
 body{
+
   min-height:100vh;
+
   background:url("final.jpg") no-repeat center center;
+
   background-size:cover;
+
   font-family:Arial,sans-serif;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   padding:20px;
 }
 
+/* CONTAINER */
+
 .container{
+
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
-  gap:30px;
+
+  gap:35px;
 }
 
-.polaroid{
+/* ÁREA FINAL */
 
-  width:min(90vw,320px);
-
-  aspect-ratio:3/4;
-
-  background:white;
-
-  border-radius:24px;
-
-  overflow:hidden;
+.polaroid-wrapper{
 
   position:relative;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  width:min(90vw,340px);
+
+  aspect-ratio:3/4;
 }
 
-.polaroid img{
+/* FOTO */
+
+.photo-layer{
+
+  position:absolute;
+
+  inset:0;
+
+  overflow:hidden;
+
+  border-radius:24px;
+}
+
+/* IMAGENS */
+
+.photo-layer img{
 
   position:absolute;
 
@@ -64,24 +87,42 @@ body{
   min-width:100%;
   min-height:100%;
 
+  max-width:none;
+  max-height:none;
+
   transform:translate(-50%,-50%);
+
+  object-fit:unset;
 }
 
-/* 2 */
-.layout-2 img{
-  height:50%;
+/* MOLDURA POLAROID */
+
+.polaroid-frame{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  z-index:5;
+
+  pointer-events:none;
 }
 
-/* 4 */
-.layout-4 img{
-  width:50%;
-  height:50%;
-}
+/* BOTÕES */
 
 .buttons{
+
   display:flex;
+
   gap:15px;
+
   flex-wrap:wrap;
+
   justify-content:center;
 }
 
@@ -96,17 +137,40 @@ button{
 
   cursor:pointer;
 
-  letter-spacing:2px;
+  font-size:12px;
+
+  letter-spacing:3px;
 }
 
 .download{
+
   background:#750014;
+
   color:white;
 }
 
 .restart{
+
   background:white;
+
   color:#750014;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .polaroid-wrapper{
+
+    width:min(92vw,320px);
+  }
+
+  button{
+
+    width:145px;
+    height:48px;
+  }
+
 }
 
 </style>
@@ -117,57 +181,89 @@ button{
 
 <div class="container">
 
-<div class="polaroid" id="polaroid">
+  <!-- POLAROID -->
+  <div
+    class="polaroid-wrapper"
+    id="polaroid"
+  >
 
-<img id="img1_final">
-<img id="img2_final">
-<img id="img3_final">
-<img id="img4_final">
+    <!-- FOTO -->
+    <div class="photo-layer">
+
+      <img id="img1_final">
+      <img id="img2_final">
+      <img id="img3_final">
+      <img id="img4_final">
+
+    </div>
+
+    <!-- MOLDURA -->
+    <img
+      class="polaroid-frame"
+      id="frame"
+    >
+
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="buttons">
+
+    <button
+      class="download"
+      onclick="downloadImage()"
+    >
+      BAIXAR
+    </button>
+
+    <button
+      class="restart"
+      onclick="restart()"
+    >
+      RECOMEÇAR
+    </button>
+
+  </div>
 
 </div>
 
-<div class="buttons">
-
-<button class="download"
-onclick="downloadImage()">
-BAIXAR
-</button>
-
-<button class="restart"
-onclick="restart()">
-RECOMEÇAR
-</button>
-
-</div>
-
-</div>
+<!-- HTML2CANVAS -->
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <script>
 
+/* INICIAR */
+
 function init(){
 
-  const layout =
+  const selected =
   localStorage.getItem('polaroid');
 
-  const polaroid =
-  document.getElementById('polaroid');
+  const frame =
+  document.getElementById('frame');
 
-  if(layout === 'Polaroid 2'){
-    polaroid.classList.add('layout-1');
+  /* DEFINE MOLDURA */
+
+  if(selected === 'Polaroid 1'){
+    frame.src = 'polaroid1.png';
   }
 
-  if(layout === 'Polaroid 3'){
-    polaroid.classList.add('layout-3');
+  if(selected === 'Polaroid 2'){
+    frame.src = 'polaroid2.png';
   }
 
-  if(layout === 'Polaroid 4'){
-    polaroid.classList.add('layout-4');
+  if(selected === 'Polaroid 3'){
+    frame.src = 'polaroid3.png';
   }
+
+  if(selected === 'Polaroid 4'){
+    frame.src = 'polaroid4.png';
+  }
+
+  /* IMAGENS */
 
   const ids =
-  ["img1","img2","img3","img4"];
+  ['img1','img2','img3','img4'];
 
   ids.forEach(id => {
 
@@ -175,20 +271,20 @@ function init(){
     localStorage.getItem(id);
 
     const img =
-    document.getElementById(id+"_final");
+    document.getElementById(id + '_final');
 
     if(data){
 
       img.src = data;
 
       const x =
-      localStorage.getItem(id+"_x") || 0;
+      localStorage.getItem(id+'_x') || 0;
 
       const y =
-      localStorage.getItem(id+"_y") || 0;
+      localStorage.getItem(id+'_y') || 0;
 
       const scale =
-      localStorage.getItem(id+"_scale") || 1;
+      localStorage.getItem(id+'_scale') || 1;
 
       img.style.transform =
       `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
@@ -202,30 +298,41 @@ function init(){
 
 }
 
-window.addEventListener('load',init);
+window.addEventListener('load', init);
+
+/* DOWNLOAD */
 
 function downloadImage(){
 
-  html2canvas(
-    document.getElementById('polaroid'),
-    {
-      scale:2,
-      useCORS:true
-    }
-  ).then(canvas => {
+  const element =
+  document.getElementById('polaroid');
+
+  html2canvas(element, {
+
+    scale:3,
+
+    useCORS:true,
+
+    backgroundColor:null
+
+  }).then(canvas => {
 
     const link =
     document.createElement('a');
 
     link.download =
-    'polaroid.png';
+    'polaroid-charry.png';
 
     link.href =
-    canvas.toDataURL();
+    canvas.toDataURL('image/png');
 
     link.click();
+
   });
+
 }
+
+/* RECOMEÇAR */
 
 function restart(){
 
