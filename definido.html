@@ -2,111 +2,100 @@
 <html lang="pt-br">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>Definido</title>
 
 <style>
 
-body{
+*{
   margin:0;
   padding:0;
-  font-family:Arial,sans-serif;
-  background:url("final.jpg") no-repeat center center fixed;
-  background-size:cover;
+  box-sizing:border-box;
 }
 
-/* CENTRAL */
-.container{
-  width:100%;
+body{
   min-height:100vh;
+  background:url("final.jpg") no-repeat center center;
+  background-size:cover;
+  font-family:Arial,sans-serif;
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:20px;
+}
+
+.container{
+  display:flex;
   flex-direction:column;
+  align-items:center;
   gap:30px;
 }
 
-/* POLAROID */
-.preview-area{
-  width:320px;
-  height:420px;
-}
+.polaroid{
 
-/* BASE POLAROID */
-.polaroid-final{
-  width:100%;
-  height:100%;
+  width:min(90vw,320px);
+
+  aspect-ratio:3/4;
+
   background:white;
-  border-radius:20px;
+
+  border-radius:24px;
+
   overflow:hidden;
+
   position:relative;
+
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* IMAGENS */
-.polaroid-final img{
+.polaroid img{
+
   position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
 
-/* LAYOUTS */
-
-/* 1 FOTO */
-.layout-1 img{
-  width:100%;
-  height:100%;
-}
-
-/* 2 FOTOS */
-.layout-2 img{
-  width:100%;
-  height:50%;
-}
-.layout-2 img:nth-child(1){ top:0; }
-.layout-2 img:nth-child(2){ top:50%; }
-
-/* 3 FOTOS */
-.layout-3 img:nth-child(1){
-  width:100%;
-  height:50%;
-  top:0;
-}
-.layout-3 img:nth-child(2),
-.layout-3 img:nth-child(3){
-  width:50%;
-  height:50%;
   top:50%;
-}
-.layout-3 img:nth-child(2){ left:0; }
-.layout-3 img:nth-child(3){ left:50%; }
+  left:50%;
 
-/* 4 FOTOS */
+  width:auto;
+  height:auto;
+
+  min-width:100%;
+  min-height:100%;
+
+  transform:translate(-50%,-50%);
+}
+
+/* 2 */
+.layout-2 img{
+  height:50%;
+}
+
+/* 4 */
 .layout-4 img{
   width:50%;
   height:50%;
 }
-.layout-4 img:nth-child(1){ top:0; left:0; }
-.layout-4 img:nth-child(2){ top:0; left:50%; }
-.layout-4 img:nth-child(3){ top:50%; left:0; }
-.layout-4 img:nth-child(4){ top:50%; left:50%; }
 
-/* BOTÕES */
 .buttons{
   display:flex;
   gap:15px;
-  margin-top:30px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 button{
+
   width:160px;
   height:50px;
+
   border:none;
-  border-radius:30px;
+
+  border-radius:50px;
+
   cursor:pointer;
-  font-size:12px;
+
   letter-spacing:2px;
 }
 
@@ -120,13 +109,6 @@ button{
   color:#750014;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  .preview-area{
-    transform:scale(0.8);
-  }
-}
-
 </style>
 
 </head>
@@ -135,104 +117,122 @@ button{
 
 <div class="container">
 
-  <!-- POLAROID -->
-  <div class="preview-area">
+<div class="polaroid" id="polaroid">
 
-    <div class="polaroid-final" id="polaroid">
-
-      <img id="img1_final">
-      <img id="img2_final">
-      <img id="img3_final">
-      <img id="img4_final">
-
-    </div>
-
-  </div>
-
-  <!-- BOTÕES -->
-  <div class="buttons">
-
-    <button class="download" onclick="downloadImage()">
-      BAIXAR
-    </button>
-
-    <button class="restart" onclick="restart()">
-      RECOMEÇAR
-    </button>
-
-  </div>
+<img id="img1_final">
+<img id="img2_final">
+<img id="img3_final">
+<img id="img4_final">
 
 </div>
 
-<!-- html2canvas -->
+<div class="buttons">
+
+<button class="download"
+onclick="downloadImage()">
+BAIXAR
+</button>
+
+<button class="restart"
+onclick="restart()">
+RECOMEÇAR
+</button>
+
+</div>
+
+</div>
+
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <script>
 
-/* CARREGAR LAYOUT + IMAGENS */
 function init(){
 
-  const layout = localStorage.getItem("polaroid") || "Polaroid 1";
+  const layout =
+  localStorage.getItem('polaroid');
 
-  const container = document.getElementById("polaroid");
+  const polaroid =
+  document.getElementById('polaroid');
 
-  if(layout.includes("2")){
-    container.classList.add("layout-2");
+  if(layout === 'Polaroid 2'){
+    polaroid.classList.add('layout-1');
   }
 
-  if(layout.includes("3")){
-    container.classList.add("layout-3");
+  if(layout === 'Polaroid 3'){
+    polaroid.classList.add('layout-3');
   }
 
-  if(layout.includes("4")){
-    container.classList.add("layout-4");
+  if(layout === 'Polaroid 4'){
+    polaroid.classList.add('layout-4');
   }
 
-  if(layout.includes("1")){
-    container.classList.add("layout-1");
-  }
-
-  const ids = ["img1","img2","img3","img4"];
+  const ids =
+  ["img1","img2","img3","img4"];
 
   ids.forEach(id => {
 
-    const data = localStorage.getItem(id);
+    const data =
+    localStorage.getItem(id);
 
-    const img = document.getElementById(id + "_final");
+    const img =
+    document.getElementById(id+"_final");
 
-    if(data && img){
+    if(data){
+
       img.src = data;
+
+      const x =
+      localStorage.getItem(id+"_x") || 0;
+
+      const y =
+      localStorage.getItem(id+"_y") || 0;
+
+      const scale =
+      localStorage.getItem(id+"_scale") || 1;
+
+      img.style.transform =
+      `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
+
+    }else{
+
+      img.style.display='none';
     }
 
   });
 
 }
 
-window.addEventListener("load", init);
+window.addEventListener('load',init);
 
-/* DOWNLOAD */
 function downloadImage(){
 
-  const element = document.getElementById("polaroid");
+  html2canvas(
+    document.getElementById('polaroid'),
+    {
+      scale:2,
+      useCORS:true
+    }
+  ).then(canvas => {
 
-  html2canvas(element, {
-    useCORS:true,
-    scale:2
-  }).then(canvas => {
+    const link =
+    document.createElement('a');
 
-    const link = document.createElement("a");
-    link.download = "polaroid.png";
-    link.href = canvas.toDataURL("image/png");
+    link.download =
+    'polaroid.png';
+
+    link.href =
+    canvas.toDataURL();
+
     link.click();
-
   });
-
 }
 
-/* RECOMEÇAR */
 function restart(){
+
   localStorage.clear();
-  window.location.href = "index.html";
+
+  window.location.href =
+  'index.html';
 }
 
 </script>
