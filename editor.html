@@ -2,8 +2,10 @@
 <html lang="pt-br">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>Editor</title>
 
 <style>
@@ -33,60 +35,77 @@ h1{
   margin-bottom:40px;
 }
 
-/* GRID */
 .photos{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:20px;
 }
 
-/* BOX */
 .photo-box{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
 
-/* FRAME */
 .preview{
   width:100%;
-  height:160px;
+  height:220px;
   background:#f4f4f4;
   border-radius:24px;
   overflow:hidden;
   position:relative;
 }
 
-/* IMAGEM EDITOR */
+/* POLAROID 2 */
+.single-photo .preview{
+  height:420px;
+}
+
 .preview img{
+
   position:absolute;
+
   top:50%;
   left:50%;
 
-  width:100%;
-  height:100%;
+  width:auto;
+  height:auto;
 
-  object-fit:cover;
+  min-width:100%;
+  min-height:100%;
+
+  max-width:none;
+  max-height:none;
 
   transform:translate(-50%,-50%) scale(1);
 
   cursor:grab;
+
   touch-action:none;
+
   user-select:none;
 }
 
-/* UPLOAD */
 .upload{
+
   width:100%;
   height:54px;
+
   background:black;
+
   color:white;
+
   border-radius:50px;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   letter-spacing:3px;
+
   font-size:11px;
+
   cursor:pointer;
 }
 
@@ -94,25 +113,32 @@ input[type=file]{
   display:none;
 }
 
-/* ZOOM */
 .zoom{
   width:100%;
-  accent-color:#750014;
 }
 
-/* BOTÃO */
 .button{
+
   width:100%;
   max-width:320px;
   height:56px;
+
   border:none;
+
   border-radius:50px;
+
   background:#750014;
+
   color:white;
+
   letter-spacing:3px;
+
   font-size:12px;
+
   cursor:pointer;
+
   display:block;
+
   margin:40px auto 0 auto;
 }
 
@@ -120,14 +146,20 @@ input[type=file]{
   display:none;
 }
 
-/* MOBILE */
 @media(max-width:768px){
-  body{padding:30px 16px;}
-  h1{font-size:28px;}
-  .preview{height:140px;}
+
+  body{
+    padding:30px 16px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -138,101 +170,149 @@ input[type=file]{
 
 <div class="photos">
 
-  <!-- FOTO 1 -->
-  <div class="photo-box">
-    <div class="preview">
-      <img id="img1">
-    </div>
+<div class="photo-box">
 
-    <label class="upload">
-      INSERIR FOTO 1
-      <input type="file" accept="image/*" onchange="loadImage(event,'img1')">
-    </label>
+<div class="preview">
+<img id="img1">
+</div>
 
-    <input type="range" min="1" max="4" step="0.1" value="1"
-      class="zoom"
-      oninput="zoomImage('img1', this.value)">
-  </div>
+<label class="upload">
 
-  <!-- FOTO 2 -->
-  <div class="photo-box" id="box2">
-    <div class="preview">
-      <img id="img2">
-    </div>
+INSERIR FOTO 1
 
-    <label class="upload">
-      INSERIR FOTO 2
-      <input type="file" accept="image/*" onchange="loadImage(event,'img2')">
-    </label>
+<input type="file"
+accept="image/*"
+onchange="loadImage(event,'img1')">
 
-    <input type="range" min="1" max="4" step="0.1" value="1"
-      class="zoom"
-      oninput="zoomImage('img2', this.value)">
-  </div>
+</label>
 
-  <!-- FOTO 3 -->
-  <div class="photo-box" id="box3">
-    <div class="preview">
-      <img id="img3">
-    </div>
-
-    <label class="upload">
-      INSERIR FOTO 3
-      <input type="file" accept="image/*" onchange="loadImage(event,'img3')">
-    </label>
-
-    <input type="range" min="1" max="4" step="0.1" value="1"
-      class="zoom"
-      oninput="zoomImage('img3', this.value)">
-  </div>
-
-  <!-- FOTO 4 -->
-  <div class="photo-box hidden" id="box4">
-    <div class="preview">
-      <img id="img4">
-    </div>
-
-    <label class="upload">
-      INSERIR FOTO 4
-      <input type="file" accept="image/*" onchange="loadImage(event,'img4')">
-    </label>
-
-    <input type="range" min="1" max="4" step="0.1" value="1"
-      class="zoom"
-      oninput="zoomImage('img4', this.value)">
-  </div>
+<input type="range"
+min="1"
+max="4"
+step="0.1"
+value="1"
+class="zoom"
+oninput="zoomImage('img1',this.value)">
 
 </div>
 
-<!-- 🔥 BOTÃO CORRIGIDO -->
+<div class="photo-box" id="box2">
+
+<div class="preview">
+<img id="img2">
+</div>
+
+<label class="upload">
+
+INSERIR FOTO 2
+
+<input type="file"
+accept="image/*"
+onchange="loadImage(event,'img2')">
+
+</label>
+
+<input type="range"
+min="1"
+max="4"
+step="0.1"
+value="1"
+class="zoom"
+oninput="zoomImage('img2',this.value)">
+
+</div>
+
+<div class="photo-box" id="box3">
+
+<div class="preview">
+<img id="img3">
+</div>
+
+<label class="upload">
+
+INSERIR FOTO 3
+
+<input type="file"
+accept="image/*"
+onchange="loadImage(event,'img3')">
+
+</label>
+
+<input type="range"
+min="1"
+max="4"
+step="0.1"
+value="1"
+class="zoom"
+oninput="zoomImage('img3',this.value)">
+
+</div>
+
+<div class="photo-box hidden" id="box4">
+
+<div class="preview">
+<img id="img4">
+</div>
+
+<label class="upload">
+
+INSERIR FOTO 4
+
+<input type="file"
+accept="image/*"
+onchange="loadImage(event,'img4')">
+
+</label>
+
+<input type="range"
+min="1"
+max="4"
+step="0.1"
+value="1"
+class="zoom"
+oninput="zoomImage('img4',this.value)">
+
+</div>
+
+</div>
+
 <button class="button" onclick="goNext()">
-  CONTINUAR
+CONTINUAR
 </button>
 
 </div>
 
 <script>
 
-/* polaroid selecionada */
-const selected = localStorage.getItem('polaroid');
+const selected =
+localStorage.getItem('polaroid');
 
 if(selected === 'Polaroid 2'){
-  document.getElementById('box2').style.display = 'none';
-  document.getElementById('box3').style.display = 'none';
+
+  document.getElementById('box2').style.display='none';
+  document.getElementById('box3').style.display='none';
+
+  document.querySelector('.photos')
+  .classList.add('single-photo');
 }
 
 if(selected === 'Polaroid 4'){
-  document.getElementById('box4').classList.remove('hidden');
+
+  document.getElementById('box4')
+  .classList.remove('hidden');
 }
 
-/* upload */
 function loadImage(event,id){
 
   const file = event.target.files[0];
 
   if(file){
-    const img = document.getElementById(id);
-    img.src = URL.createObjectURL(file);
+
+    const img =
+    document.getElementById(id);
+
+    img.src =
+    URL.createObjectURL(file);
 
     img.dataset.scale = 1;
     img.dataset.x = 0;
@@ -242,40 +322,52 @@ function loadImage(event,id){
   }
 }
 
-/* zoom */
 function zoomImage(id,value){
-  const img = document.getElementById(id);
+
+  const img =
+  document.getElementById(id);
+
   img.dataset.scale = value;
+
   updateTransform(img);
 }
 
-/* drag */
-document.querySelectorAll('.preview img').forEach(img => {
+document.querySelectorAll('.preview img')
+.forEach(img => {
 
   let dragging = false;
+
   let startX = 0;
   let startY = 0;
+
   let currentX = 0;
   let currentY = 0;
 
-  img.dataset.scale = 1;
-
   function start(e){
+
     dragging = true;
 
-    const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    const x =
+    e.touches ? e.touches[0].clientX : e.clientX;
+
+    const y =
+    e.touches ? e.touches[0].clientY : e.clientY;
 
     startX = x - currentX;
     startY = y - currentY;
   }
 
   function move(e){
+
     if(!dragging) return;
+
     e.preventDefault();
 
-    const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    const x =
+    e.touches ? e.touches[0].clientX : e.clientX;
+
+    const y =
+    e.touches ? e.touches[0].clientY : e.clientY;
 
     currentX = x - startX;
     currentY = y - startY;
@@ -290,40 +382,72 @@ document.querySelectorAll('.preview img').forEach(img => {
     dragging = false;
   }
 
-  img.addEventListener('mousedown', start);
-  window.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', end);
+  img.addEventListener('mousedown',start);
 
-  img.addEventListener('touchstart', start);
-  window.addEventListener('touchmove', move, {passive:false});
-  window.addEventListener('touchend', end);
+  window.addEventListener('mousemove',move);
+
+  window.addEventListener('mouseup',end);
+
+  img.addEventListener('touchstart',start);
+
+  window.addEventListener(
+    'touchmove',
+    move,
+    {passive:false}
+  );
+
+  window.addEventListener('touchend',end);
 
 });
 
-/* transform */
 function updateTransform(img){
 
-  const scale = parseFloat(img.dataset.scale || 1);
-  const x = parseFloat(img.dataset.x || 0);
-  const y = parseFloat(img.dataset.y || 0);
+  const scale =
+  parseFloat(img.dataset.scale || 1);
+
+  const x =
+  parseFloat(img.dataset.x || 0);
+
+  const y =
+  parseFloat(img.dataset.y || 0);
 
   img.style.transform =
-    `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
+  `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
 }
 
-/* 🔥 BOTÃO CONTINUAR */
 function goNext(){
 
-  const ids = ["img1","img2","img3","img4"];
+  const ids =
+  ["img1","img2","img3","img4"];
 
   ids.forEach(id => {
-    const img = document.getElementById(id);
+
+    const img =
+    document.getElementById(id);
+
     if(img && img.src){
-      localStorage.setItem(id, img.src);
+
+      localStorage.setItem(id,img.src);
+
+      localStorage.setItem(
+        id+"_x",
+        img.dataset.x || 0
+      );
+
+      localStorage.setItem(
+        id+"_y",
+        img.dataset.y || 0
+      );
+
+      localStorage.setItem(
+        id+"_scale",
+        img.dataset.scale || 1
+      );
     }
   });
 
-  window.location.href = "definido.html";
+  window.location.href =
+  "definido.html";
 }
 
 </script>
