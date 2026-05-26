@@ -59,27 +59,68 @@ body{
   aspect-ratio:3/4;
 }
 
-/* ÁREA DA FOTO */
+/* FOTO */
 
 .photo-layer{
 
   position:absolute;
 
-  /* 🔥 AJUSTE DA ÁREA INTERNA */
-  top:8%;
-  left:8%;
-
-  width:84%;
-  height:67%;
-
   overflow:hidden;
 
   z-index:2;
+}
+
+/* 🔥 AJUSTES INDIVIDUAIS */
+
+/* POLAROID 1 */
+.polaroid-1 .photo-layer{
+
+  top:11%;
+  left:10%;
+
+  width:80%;
+  height:76%;
 
   border-radius:8px;
 }
 
-/* FOTO */
+/* POLAROID 2 */
+.polaroid-2 .photo-layer{
+
+  top:10%;
+  left:9%;
+
+  width:82%;
+  height:78%;
+
+  border-radius:8px;
+}
+
+/* POLAROID 3 */
+.polaroid-3 .photo-layer{
+
+  top:11%;
+  left:10%;
+
+  width:80%;
+  height:75%;
+
+  border-radius:8px;
+}
+
+/* POLAROID 4 */
+.polaroid-4 .photo-layer{
+
+  top:10%;
+  left:10%;
+
+  width:80%;
+  height:76%;
+
+  border-radius:8px;
+}
+
+/* IMAGEM */
 
 .photo-layer img{
 
@@ -99,7 +140,9 @@ body{
 
   transform:translate(-50%,-50%) scale(1);
 
-  object-fit:cover;
+  object-fit:contain;
+
+  background:white;
 }
 
 /* MOLDURA */
@@ -246,28 +289,43 @@ function init(){
   const selected =
   localStorage.getItem('polaroid');
 
+  const wrapper =
+  document.getElementById('polaroid');
+
   const frame =
   document.getElementById('frame');
 
-  /* DEFINE A POLAROID */
+  /* DEFINE POLAROID */
 
   if(selected === 'Polaroid 1'){
+
     frame.src = 'polaroid1.png';
+
+    wrapper.classList.add('polaroid-1');
   }
 
   if(selected === 'Polaroid 2'){
+
     frame.src = 'polaroid2.png';
+
+    wrapper.classList.add('polaroid-2');
   }
 
   if(selected === 'Polaroid 3'){
+
     frame.src = 'polaroid3.png';
+
+    wrapper.classList.add('polaroid-3');
   }
 
   if(selected === 'Polaroid 4'){
+
     frame.src = 'polaroid4.png';
+
+    wrapper.classList.add('polaroid-4');
   }
 
-  /* CARREGA AS IMAGENS */
+  /* CARREGA IMAGENS */
 
   const ids =
   ['img1','img2','img3','img4'];
@@ -283,8 +341,6 @@ function init(){
     if(data){
 
       img.src = data;
-
-      /* AJUSTES SALVOS */
 
       const x =
       localStorage.getItem(id+'_x') || 0;
