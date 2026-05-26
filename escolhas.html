@@ -3,228 +3,156 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Escolhas</title>
 
-  <title>Escolhas</title>
+<style>
 
-  <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+body{
+  background:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  padding:60px 20px;
+}
 
-    body{
+.container{
+  max-width:1400px;
+  margin:0 auto;
+  text-align:center;
+}
 
-      background:white;
+h1{
+  font-size:42px;
+  font-weight:300;
+  margin-bottom:70px;
+}
 
-      font-family:Arial,sans-serif;
+.polaroids{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+  margin-bottom:50px;
+}
 
-      min-height:100vh;
+.polaroid{
+  width:min(220px,45vw);
+  cursor:pointer;
+  transition:0.3s;
+  border:3px solid transparent;
+}
 
-      padding:60px 20px;
+.polaroid img{
+  width:100%;
+  display:block;
+}
 
-    }
+.polaroid.active{
+  transform:scale(1.05);
+}
 
-    .container{
+.button{
 
-      max-width:1400px;
+  width:220px;
+  height:56px;
 
-      margin:0 auto;
+  border:none;
 
-      text-align:center;
+  border-radius:50px;
 
-    }
+  background:black;
 
-    h1{
+  color:white;
 
-      font-size:42px;
+  letter-spacing:3px;
 
-      font-weight:300;
+  font-size:12px;
 
-      margin-bottom:70px;
+  cursor:pointer;
+}
 
-      letter-spacing:2px;
+@media(max-width:768px){
 
-    }
+  h1{
+    font-size:30px;
+    margin-bottom:40px;
+  }
 
-    .polaroids{
+}
 
-      display:flex;
-
-      justify-content:center;
-
-      align-items:flex-start;
-
-      gap:25px;
-
-      flex-wrap:wrap;
-
-      margin-bottom:50px;
-
-    }
-
-    .polaroid{
-
-      width:220px;
-
-      cursor:pointer;
-
-      transition:0.3s;
-
-      border:3px solid transparent;
-
-    }
-
-    .polaroid img{
-
-      width:100%;
-
-      display:block;
-
-    }
-
-    .polaroid:nth-child(1){
-
-      transform:rotate(-6deg);
-
-    }
-
-    .polaroid:nth-child(2){
-
-      transform:rotate(5deg);
-
-    }
-
-    .polaroid:nth-child(3){
-
-      transform:rotate(-3deg);
-
-    }
-
-    .polaroid:nth-child(4){
-
-      transform:rotate(4deg);
-
-    }
-
-    .polaroid.active{
-
-      transform:scale(1.08) rotate(0deg);
-
-    }
-
-    .button{
-
-      width:220px;
-      height:56px;
-
-      border:none;
-
-      border-radius:50px;
-
-      background:black;
-
-      color:white;
-
-      letter-spacing:3px;
-
-      font-size:12px;
-
-      cursor:pointer;
-
-    }
-
-  </style>
+</style>
 
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>Escolha sua polaroid</h1>
+  <h1>Escolha sua polaroid</h1>
 
-    <div class="polaroids">
+  <div class="polaroids">
 
-      <div class="polaroid"
-        onclick="selectPolaroid(this,'Polaroid 1')">
-
-        <img src="polaroid1.png">
-
-      </div>
-
-      <div class="polaroid"
-        onclick="selectPolaroid(this,'Polaroid 2')">
-
-        <img src="polaroid2.png">
-
-      </div>
-
-      <div class="polaroid"
-        onclick="selectPolaroid(this,'Polaroid 3')">
-
-        <img src="polaroid3.png">
-
-      </div>
-
-      <div class="polaroid"
-        onclick="selectPolaroid(this,'Polaroid 4')">
-
-        <img src="polaroid4.png">
-
-      </div>
-
+    <div class="polaroid" onclick="selectPolaroid(this,'Polaroid 1')">
+      <img src="polaroid1.png">
     </div>
 
-    <button class="button" onclick="goToEditor()">
-      CONTINUAR
-    </button>
+    <div class="polaroid" onclick="selectPolaroid(this,'Polaroid 2')">
+      <img src="polaroid2.png">
+    </div>
+
+    <div class="polaroid" onclick="selectPolaroid(this,'Polaroid 3')">
+      <img src="polaroid3.png">
+    </div>
+
+    <div class="polaroid" onclick="selectPolaroid(this,'Polaroid 4')">
+      <img src="polaroid4.png">
+    </div>
 
   </div>
 
-  <script>
+  <button class="button" onclick="goToEditor()">
+    CONTINUAR
+  </button>
 
-    let selectedPolaroid = '';
+</div>
 
-    function selectPolaroid(element,name){
+<script>
 
-      document.querySelectorAll('.polaroid').forEach(item => {
+let selectedPolaroid = '';
 
-        item.classList.remove('active');
+function selectPolaroid(element,name){
 
-      });
+  document.querySelectorAll('.polaroid')
+  .forEach(item => item.classList.remove('active'));
 
-      element.classList.add('active');
+  element.classList.add('active');
 
-      selectedPolaroid = name;
+  selectedPolaroid = name;
+}
 
-    }
+function goToEditor(){
 
-    function goToEditor(){
+  if(selectedPolaroid === ''){
 
-      if(selectedPolaroid === ''){
+    alert('Escolha uma polaroid');
+    return;
 
-        alert('Escolha uma polaroid');
+  }
 
-        return;
+  localStorage.setItem('polaroid', selectedPolaroid);
 
-      }
+  window.location.href = 'editor.html';
+}
 
-      localStorage.setItem(
-        'polaroid',
-        selectedPolaroid
-      );
-
-      window.location.href = 'editor.html';
-
-    }
-
-  </script>
+</script>
 
 </body>
-
 </html>
